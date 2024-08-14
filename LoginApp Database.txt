@@ -1,0 +1,26 @@
+CREATE DATABASE WebAppUser;
+
+use WebAppUser
+
+CREATE TABLE Users (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(50) NOT NULL,
+    RoleID INT NOT NULL
+);
+
+CREATE TABLE Roles (
+    RoleID INT PRIMARY KEY IDENTITY(1,1),
+    RoleName NVARCHAR(50) NOT NULL
+);
+
+INSERT INTO Roles (RoleName) VALUES ('Admin');
+INSERT INTO Roles (RoleName) VALUES ('User');
+
+ALTER TABLE Users ADD RoleID INT FOREIGN KEY REFERENCES Roles(RoleID);
+
+INSERT INTO Users (Username, Password, RoleID) VALUES ('admin', 'admin123', 1);
+INSERT INTO Users (Username, Password, RoleID) VALUES ('user1', 'user123', 2);
+
+select * from Users
+   select * from Roles
